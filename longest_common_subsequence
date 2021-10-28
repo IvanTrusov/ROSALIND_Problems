@@ -1,0 +1,10 @@
+s1,s2='AATTGGC','AATCCGC'
+F, S = s1,s2
+seq = [''] * (len(S) + 1)
+
+for i in F:
+    last, seq = seq, ['']
+    for j, t in enumerate(S):
+        seq.append(last[j] + i if i==t else max(last[j+1], seq[-1]))
+
+print (seq[-1])
