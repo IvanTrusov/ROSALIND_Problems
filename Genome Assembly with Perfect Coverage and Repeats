@@ -17,5 +17,5 @@ set=set()
 
 coverings(k_mers[0], edges, k,set)
 
-for i in set:
+for i in set: #All circular strings assembled by complete cycles
     print(i[:len(k_mers)])
