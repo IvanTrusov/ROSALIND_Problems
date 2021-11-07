@@ -1,0 +1,31 @@
+def DNA_to_RNA(DNA):
+    matrix = {'G': 'C', 'C': 'G', 'T': 'A', 'A': 'U'}
+    
+    try:
+        RNA = [matrix[nuk] for nuk in DNA]
+        return "".join(RNA)
+
+    except KeyError:
+        print('Invalid Input')
+
+
+def RNA_to_DNA(RNA):
+    matrix = {'C': 'G', 'G': 'C', 'A': 'T', 'U': 'A'}
+    
+    try:
+        DNA = [matrix[nuk] for nuk in RNA]
+        return "".join(DNA)
+
+    except KeyError:
+        print('Invalid Input')
+
+
+def DNA_to_cDNA(DNA):
+    matrix = {'G': 'C', 'C': 'G', 'T': 'A', 'A': 'U'}
+    
+    try:
+        cDNA = [matrix[nuk] for nuk in DNA[::-1]]
+        return "".join(cDNA)
+
+    except KeyError:
+        print('Invalid Input')
