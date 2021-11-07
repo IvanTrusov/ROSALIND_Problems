@@ -1,0 +1,44 @@
+'''Finding N-glycosylation motif'''
+from FASTA import FASTA
+import requests
+
+with open('keys.txt') as data:
+
+    protein_list=[]
+
+    for line in data:
+        protein_list.append(line.strip())
+
+with open('test.txt','r+') as proteins:
+
+    for name in protein_list:
+        link = requests.get(str('https://www.uniprot.org/uniprot/' + name + '.fasta'))
+        proteins.write(link.text)
+
+    dictionary = FASTA(proteins)
+
+list_value = dictionary.values()
+
+for seq in list_value:
+    position_in_seq = []
+
+    for n, amino_acid in enumerate(seq):
+
+        if amino_acid == 'N' and n+3<len(seq): #N-glycosylation motif is written as N{P}[ST]{P}
+
+            if seq[n + 1] != 'P' and (seq[n + 2] == 'S' or seq[n + 2] == 'T') and seq[n + 3] != 'P': 
+                position_in_seq.append(str(n+1))
+
+    if len(position_in_seq)>0:
+
+        print(protein_list[0])
+
+        print(str(" ".join(position_in_seq)))
+
+    protein_list.pop(0)
+
+
+
+
+
+
